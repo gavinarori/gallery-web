@@ -24,7 +24,7 @@ type ArticleProps = {
 export default function Article({ id, urls, user, created_at, likes }: ArticleProps) {
   return (
     <>
-      <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md bg-white">
+      <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md bg-gray-100">
         
         <article key={id} className="rounded-3xl">
         <div className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
