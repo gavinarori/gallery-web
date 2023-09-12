@@ -24,10 +24,10 @@ type ArticleProps = {
 export default function Article({ id, urls, user, created_at, likes }: ArticleProps) {
   return (
     <>
-      <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md bg-black antialiased">
+      <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md bg-white">
         
         <article key={id} className="rounded-3xl">
-        <div className="after:content group relative mb-5 block w-full text-white/75 cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
+        <div className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
         <img
             src={urls.regular}
             alt={user.username}
@@ -39,7 +39,7 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
 
 
           <div className="p-5 pb-0 flex flex-col md:flex-row items-start md:items-center justify-between">
-            <article className="flex items-center justify-start text-white/75">
+            <article className="flex items-center justify-start">
             <Link href='/splash'>
               <img
                 src={user.profile_image.medium}
@@ -48,23 +48,23 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
               />
               </Link>
               <ul>
-                <li className="text-slate-800 font-bold text-white/75">{user.name}</li>
-                <li className="text-sm text-slate-800 opacity-75 text-white/75">
+                <li className="text-slate-800 font-bold">{user.name}</li>
+                <li className="text-sm text-slate-800 opacity-75">
                   {format(new Date(created_at), 'dd MMMM yyyy')}
                 </li>
               </ul>
             </article>
 
-            <article className="mt-5 md:mt-0 text-white/75">
+            <article className="mt-5 md:mt-0">
               <a
                 href={`https://instagram.com/${user.instagram_username}`}
-                className="text-sm text-slate-800 opacity-75 underline text-white/75" 
+                className="text-sm text-slate-800 opacity-75 underline"
                 target="_blank"
                 rel="noreferrer"
               >
                 {user.instagram_username}
               </a>
-              <small className="text-slate-800 opacity-75 block text-white/75">{likes} Likes</small>
+              <small className="text-slate-800 opacity-75 block">{likes} Likes</small>
             </article>
           </div>
         </article>

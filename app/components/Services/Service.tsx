@@ -39,16 +39,16 @@ const Service = () => {
   };
 
   return (
-    <div className="px-6 py-14 sm:px-10 bg-black antialiased">
+    <div className="px-6 py-14 sm:px-10 bg-slate-300">
       <div>
-        <h1 className="text-5xl font-bold mt-3 text-white/75">SourceCode</h1>
-        <p className="mt-4 max-w-[750px] text-lg  text-white/75 text-muted-foreground sm:text-xl">
+        <h1 className="text-5xl font-bold mt-3">SourceCode</h1>
+        <p className="mt-4 max-w-[750px] text-lg text-muted-foreground sm:text-xl">
           An application boilerplate built with a modern stack. Simple to get
           started building your first social app. Leveraging ShadCN, Lens
           Protocol, Next.js, and WalletConnect.
         </p>
         <div className="mt-6 flex">
-          <button className="inline-flex items-center justify-center text-white/75 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 mr-3">
+          <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 mr-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -69,7 +69,7 @@ const Service = () => {
           </button>
           <a
             href="https://aave.notion.site/08521d6d8ec84d10bf0f6d03abcf60cc?v=eb989b589d7447918187bf3c588a2748&amp;pvs=4"
-            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ const Service = () => {
       </div>
       <div className="mt-[70px] flex ml-2">
         <div>
-          <button className="inline-flex text-white/75 items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+          <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
             My dashboard
           </button>
         </div>
@@ -138,7 +138,7 @@ const Service = () => {
         <div className="sm:border-t sm:border-r sm:border-b rounded-tr rounded-br flex flex-1 pb-4">
           <div className="flex flex-1 flex-wrap p-4">
             {activeTab === 'profiles' && (
-              <div className="mx-auto max-w-[1990px] bg-black antialiased  p-4">
+              <div className="mx-auto max-w-[1990px] bg-slate-200 p-4">
                 <div className="columns-1 gap-4  sm:columns-2 xl:columns-3 2xl:columns-4">
                   <div className="after:content relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-slate-600 px-6 pb-16 pt-64 text-center text-black shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
                     <div className="absolute inset-0 flex items-center justify-center opacity-20">
@@ -190,6 +190,7 @@ const Service = () => {
                 </div>
               </div>
             )}
+            {activeTab === 'music' && <MusicTab />}
             {activeTab === 'collect' && (
               <div className="mx-auto max-w-[1990px] bg-cyan-800 p-4">
                 <div className="columns-1 gap-4  sm:columns-2 xl:columns-3 2xl:columns-4">

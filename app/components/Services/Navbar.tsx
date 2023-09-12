@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const Navbar = () => {
   return (
-    <div className='border-b flex flex-col sm:flex-row items-start sm:items-center sm:pr-10 bg-black antialiased'>
+    <div className='border-b flex flex-col sm:flex-row items-start sm:items-center sm:pr-10 bg-slate-300'>
       <div className="py-3 px-8 flex flex-1 items-center ">
         <Link className="mr-5 flex items-center" href="/">
           <svg xmlns="http://www.w3.org/2000/svg" 
@@ -21,14 +21,14 @@ export const Navbar = () => {
               <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97">
                 </path>
           </svg>
-          <p className="ml-2 mr-4 text-lg text-white/75 font-semibold">
+          <p className="ml-2 mr-4 text-lg font-semibold">
             SourceCode
             </p>
         </Link>
         <a className="mr-5 text-sm " href="/">
           <p>Home</p>
           </a>
-          <Link className="mr-5 text-sm opacity-60 text-white/75" href="/search">
+          <Link className="mr-5 text-sm opacity-60" href="/search">
             <p>Search</p></Link>
     </div>
       <div className='flex sm:items-center pl-8 pb-3 sm:pb-0'>
