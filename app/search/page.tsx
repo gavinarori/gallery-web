@@ -1,11 +1,9 @@
 "use client"
-import React, { useState, KeyboardEvent } from 'react';
+import React, { useState } from 'react';
 
-interface SearchProps {
-  onSearch: (query: string) => void;
-}
 
-const Search: React.FC<SearchProps> = ({ onSearch }) => {
+
+const Search = ({ onSearch }:{onSearch: (query: string) => void}) => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
