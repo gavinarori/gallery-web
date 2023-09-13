@@ -22,14 +22,6 @@ export const Navbar = () => {
 
     </div>
       <div className='flex sm:items-center pl-8 pb-3 sm:pb-0'>
-      <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-slate-200 text-secondary-foreground hover:bg-slate-200/80 h-10 px-4 py-2 mr-4">
-        Search
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 ml-2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
-
-      {/**theme button */}
-      </button>
         <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-slate-200 hover:bg-slate-200/80  h-10 w-10">
           <svg xmlns="http://www.w3.org/2000/svg" 
           width="24" 
