@@ -10,12 +10,12 @@ import Footer from '@/app/components/Services/Footer';
 
 
 const Dashboard = (): JSX.Element => {
-  
+  const searchQuery = 'cats'
   return (
     <div className=''>
       
         <Navbar />
-        <Service  />
+        <Service searchQuery={searchQuery} />
         <Footer/>
 
       
