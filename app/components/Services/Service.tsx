@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import MusicTab from './songs';
+import Modal from '@/app/components/modal/modal';
 
 import Article from '@/app/components/Article';
 
+
 const tabs = [
-  { name: 'profiles', icon: '' },
-  { name: 'publications', icon: '' },
-  { name: 'music', icon: '' },
-  { name: 'collect', icon: '' },
+  { name: 'profiles', icon: '' }
 ];
 
 const Service = () => {
   const [images, setImages] = useState<any[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null); // Track the selected image for the modal
+
 
 
   useEffect(() => {
@@ -38,14 +38,24 @@ const Service = () => {
     setActiveTab(tabName);
   };
 
+
+   // Function to open the modal with a selected image
+   const openModal = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
   return (
     <div className="px-6 py-14 sm:px-10 bg-gray-100">
       <div>
-        <h1 className="text-5xl font-bold mt-3">SourceCode</h1>
+        <h1 className="text-5xl font-bold mt-3">gallery-web</h1>
         <p className="mt-4 max-w-[750px] text-lg text-muted-foreground sm:text-xl">
           An application boilerplate built with a modern stack. Simple to get
-          started building your first social app. Leveraging ShadCN, Lens
-          Protocol, Next.js, and WalletConnect.
+          started building your first social app. Leveraging Unsplash APIs, Lens
+          Protocol, Next.js, and tailwindCSS.
         </p>
         <div className="mt-6 flex">
           <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 mr-3">
@@ -106,10 +116,10 @@ const Service = () => {
               key={tab.name}
               onClick={() => handleTabClick(tab.name)}
               className={`${
-                tab.name === activeTab
-                  ? 'border-black text-black'
-                  : 'border-transparent text-gray-400 cursor-pointer'
-              } inline-flex items-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 justify-start mb-1`}
+                
+                  'border-black text-black'
+                  
+              } inline-flex items-center rounded-md text-sm font-medium  transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-5 py-2 justify-start mb-1`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,25 +147,12 @@ const Service = () => {
         {/** Code for various tabs */}
         <div className="sm:border-t sm:border-r sm:border-b rounded-tr rounded-br flex flex-1 pb-4">
           <div className="flex flex-1 flex-wrap p-4">
-            {activeTab === 'profiles' && (
               <div className="mx-auto max-w-[1990px] bg-gray-100 p-4">
                 <div className="columns-1 gap-4  sm:columns-2 xl:columns-3 2xl:columns-4">
                   <div className="after:content relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-slate-600 px-6 pb-16 pt-64 text-center text-black shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
                     <div className="absolute inset-0 flex items-center justify-center opacity-20">
                       <span className="flex max-h-full max-w-full items-center justify-center">
-                        <svg
-                          aria-labelledby="conf-city-title"
-                          fill="none"
-                          role="img"
-                          viewBox="0 0 620 704"
-                          width="620"
-                          height="704"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <title id="conf-city-title">
-                            Line drawing of the Golden Gate Bridge in San Francisco.
-                          </title>
-                        </svg>
+                        
                       </span>
                       <span className="absolute left-0 right-0 bottom-0 h-[400px] bg-gradient-to-b from-black/0 via-black to-black"></span>
                     </div>
@@ -179,143 +176,24 @@ const Service = () => {
                       Our incredible Next.js community got together in San
                       Francisco for our first-ever in-person conference!
                     </p>
-                    <a className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4">
-                      Clone and Deploy
-                    </a>
                   </div>
-                    {images.map((image,i) => (
-                      <Article key={i} {...image} />
-                    ))}
-              
-                </div>
-              </div>
-            )}
-            {activeTab === 'music' && <MusicTab />}
-            {activeTab === 'collect' && (
-              <div className="mx-auto max-w-[1990px] bg-cyan-800 p-4">
-                <div className="columns-1 gap-4  sm:columns-2 xl:columns-3 2xl:columns-4">
-                  <div className="after:content relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-rose-700 px-6 pb-16 pt-64 text-center text-white/75 shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
-                    <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                      <span className="flex max-h-full max-w-full items-center justify-center">
-                        <svg
-                          aria-labelledby="conf-city-title"
-                          fill="none"
-                          role="img"
-                          viewBox="0 0 620 704"
-                          width="620"
-                          height="704"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <title id="conf-city-title">
-                            Line drawing of the Golden Gate Bridge in San Francisco.
-                          </title>
-                        </svg>
-                      </span>
-                      <span className="absolute left-0 right-0 bottom-0 h-[400px] bg-gradient-to-b from-black/0 via-black to-black"></span>
-                    </div>
-                    <svg
-                      aria-labelledby="conf-logo-title-header"
-                      fill="none"
-                      role="img"
-                      viewBox="0 0 172 26"
-                      width="172"
-                      height="26"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <title id="conf-logo-title-header">
-                        Next.js Conf logo using a newly designed Next.js logo.
-                      </title>
-                    </svg>
-                    <h1 className="mt-8 mb-4 text-base font-bold uppercase tracking-widest">
-                      2022 Event Photos
-                    </h1>
-                    <p className="max-w-[40ch] text-white/75 sm:max-w-[32ch]">
-                      Our incredible Next.js community got together in San
-                      Francisco for our first-ever in-person conference!
-                    </p>
-                    <a className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4">
-                      Clone and Deploy
-                    </a>
-                  </div>
-                  
+                    
+                  {images.map((image, i) => (
+                  <div
+                    key={i}
 
-            <iframe
-                title="Spotify Embed: Recommendation Playlist "
-                src={`https://open.spotify.com/embed/playlist/2TDirCU2XThvvMG0Wt3byJ?utm_source=generator&theme=0`}
-                width="100%"
-                height="100%"
-                style={{ minHeight: '360px' }}
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-/>
-              
-                </div>
-              </div>
-            )}
-            {activeTab === 'publications' && (
-              <div className="mx-auto max-w-[1990px] bg-blue-100 p-4">
-                <div className="columns-1 gap-4  sm:columns-2 xl:columns-3 2xl:columns-4">
-                  <div className="after:content relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-rose-700 px-6 pb-16 pt-64 text-center text-white/75 shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
-                    <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                      <span className="flex max-h-full max-w-full items-center justify-center">
-                        <svg
-                          aria-labelledby="conf-city-title"
-                          fill="none"
-                          role="img"
-                          viewBox="0 0 620 704"
-                          width="620"
-                          height="704"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <title id="conf-city-title">
-                            Line drawing of the Golden Gate Bridge in San Francisco.
-                          </title>
-                        </svg>
-                      </span>
-                      <span className="absolute left-0 right-0 bottom-0 h-[400px] bg-gradient-to-b from-black/0 via-black to-black"></span>
-                    </div>
-                    <svg
-                      aria-labelledby="conf-logo-title-header"
-                      fill="none"
-                      role="img"
-                      viewBox="0 0 172 26"
-                      width="172"
-                      height="26"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <title id="conf-logo-title-header">
-                        Next.js Conf logo using a newly designed Next.js logo.
-                      </title>
-                    </svg>
-                    <h1 className="mt-8 mb-4 text-base font-bold uppercase tracking-widest">
-                      2022 Event Photos
-                    </h1>
-                    <p className="max-w-[40ch] text-white/75 sm:max-w-[32ch]">
-                      Our incredible Next.js community got together in San
-                      Francisco for our first-ever in-person conference!
-                    </p>
-                    <a className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4">
-                      Clone and Deploy
-                    </a>
+                    onClick={() => openModal(image.urls.full)} // Open modal when an image is clicked
+                  >
+                    {/* ... (your existing code) */}
+                    <Article key={i} {...image} />
                   </div>
-                  
-
-            <iframe
-                title="Spotify Embed: Recommendation Playlist "
-                src={`https://open.spotify.com/embed/playlist/2TDirCU2XThvvMG0Wt3byJ?utm_source=generator&theme=0`}
-                width="100%"
-                height="100%"
-                style={{ minHeight: '360px' }}
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-/>
-              
+                ))}
+                     {/* Render the modal if a selected image exists */}
+                {selectedImage && (
+                  <Modal imageUrl={selectedImage} closeModal={closeModal}    />
+                )}
                 </div>
               </div>
-            )}
-            
           </div>
         </div>
       </div>

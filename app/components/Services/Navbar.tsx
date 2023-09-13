@@ -6,47 +6,28 @@ export const Navbar = () => {
     <div className='border-b flex flex-col sm:flex-row items-start sm:items-center sm:pr-10 bg-gray-100'>
       <div className="py-3 px-8 flex flex-1 items-center ">
         <Link className="mr-5 flex items-center" href="/">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-          width="19" 
-          height="19" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-          className="opacity-85">
-            <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z">
-              </path>
-              <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97">
-                </path>
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" 
+        stroke="currentColor" className="w-6 h-6 mr-2">
+        <path strokeLinecap="round" strokeLinejoin="round" 
+        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+         </svg>
+
           <p className="ml-2 mr-4 text-lg font-semibold">
-            SourceCode
+            Gallery-web
             </p>
         </Link>
         <a className="mr-5 text-sm " href="/">
           <p>Home</p>
           </a>
-          <Link className="mr-5 text-sm opacity-60" href="/search">
-            <p>Search</p></Link>
+
     </div>
       <div className='flex sm:items-center pl-8 pb-3 sm:pb-0'>
       <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-slate-200 text-secondary-foreground hover:bg-slate-200/80 h-10 px-4 py-2 mr-4">
-        Sign In
-        <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="24" 
-        height="24" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-        className="h-4 w-4">
-          <path d="m9 18 6-6-6-6"></path>
-      </svg>
+        Search
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 ml-2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+
       {/**theme button */}
       </button>
         <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-slate-200 hover:bg-slate-200/80  h-10 w-10">

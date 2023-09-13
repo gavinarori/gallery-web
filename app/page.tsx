@@ -3,6 +3,7 @@
 import React from 'react';
 import { Navbar } from '@/app/components/Services/Navbar';
 import Service from '@/app/components/Services/Service';
+import Footer from '@/app/components/Services/Footer';
 
 
 
@@ -15,6 +16,7 @@ const Dashboard = (): JSX.Element => {
       
         <Navbar />
         <Service  />
+        <Footer/>
 
       
     </div>
