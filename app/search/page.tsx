@@ -1,9 +1,12 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 
 
+interface SearchProps {
+  onSearch: (query: string) => void;
+}
 
-const Search = ({ onSearch }:{onSearch:any}) => {
+export const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,4 +46,4 @@ const Search = ({ onSearch }:{onSearch:any}) => {
   );
 };
 
-export default Search;
+
