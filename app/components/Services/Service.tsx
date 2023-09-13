@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '@/app/components/modal/modal';
-import {Search} from '@/app/search/page';
+import {Search} from '@/app/search/Search';
 import Article from '@/app/components/Article';
 interface ServiceProps {
   searchQuery: string;
