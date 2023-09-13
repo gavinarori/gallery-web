@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 
 
-const Search = ({ onSearch }:{onSearch: (query: string) => void}) => {
+const Search = ({ onSearch }:{onSearch:any}) => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
