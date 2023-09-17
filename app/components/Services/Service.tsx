@@ -178,7 +178,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
         )}
                      {/* Render the modal if a selected image exists */}
                 {selectedImage && (
-                  <Modal imageUrl={selectedImage} closeModal={closeModal}    />
+                  <Modal imageUrl={selectedImage} alt_description={selectedImage} closeModal={closeModal}    />
                 )}
                 </div>
               </div>

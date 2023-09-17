@@ -34,13 +34,9 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
             className="h-52 object-fit object-cover w-full lg:h-80 rounded-3xl transform  brightness-90 transition will-change-auto group-hover:brightness-125" 
           />
         </div>
-
-        
-
-
           <div className="p-5 pb-0 flex flex-col md:flex-row items-start md:items-center justify-between">
             <article className="flex items-center justify-start">
-            <Link href='/splash'>
+            <Link href='/components/splash'>
               <img
                 src={user.profile_image.medium}
                 alt={user.username}

@@ -25,9 +25,9 @@ export default function Profile() {
         const response = await fetch(
           `https://api.unsplash.com/users/${username}?client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
         );
-        const data: Person = await response.json();
-        setPerson(data);
+        const data = await response.json();
         console.log(data);
+        setPerson(data);
       } catch (error) {
         console.error("Error fetching person data:", error);
       }
