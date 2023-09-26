@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Modal from '@/app/components/modal/modal';
 import {Search} from '@/app/search/Search';
 import Article from '@/app/components/Article';
+
 interface ServiceProps {
   searchQuery: string;
 }
@@ -174,7 +175,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
             </div>
           ))
         ) : (
-          <p>Error loading images.</p> // Render an error message
+           <p>error loading....</p>
         )}
                      {/* Render the modal if a selected image exists */}
                 {selectedImage && (
@@ -190,3 +191,5 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
 };
 
 export default Service;
+
+

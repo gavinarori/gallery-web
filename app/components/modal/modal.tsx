@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ imageUrl, closeModal,alt_description}) =>
   </svg>
 
         </button>
-        <img src={imageUrl} alt="Selected Image" className=" pb-11 ml-10 rounded-md   object-cover  pointer-events-none h-[602px] w-[1200px] mb-12 mr-10" />
+        <img src={imageUrl}  alt="Selected Image" className=" pb-11 ml-10 rounded-md   object-cover  pointer-events-none h-[602px] w-[1200px] mb-12 mr-10" />
         <p>{alt_description}</p>
       </div>
     </div>
