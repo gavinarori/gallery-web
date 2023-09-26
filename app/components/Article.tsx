@@ -30,7 +30,7 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
   
   setTimeout(() => {
     setIsLoading(false);
-  }, 4000);
+  }, 2000);
 
   return (
     <>
