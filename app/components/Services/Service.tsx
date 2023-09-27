@@ -25,7 +25,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
           `https://api.unsplash.com/photos?page=${randomPage}&query=cats&client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
         );
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setImages(data);
       } catch (error) {
         console.error('Error fetching images:', error);
@@ -58,7 +58,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
         `https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
       );
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       setImages(data.results);
     } catch (error) {
       console.error('Error fetching images:', error);
