@@ -1,8 +1,20 @@
 import React from 'react'
 import Link from 'next/link'
 import BuyMeACoffee from './icons/BuyMeCoffee'
+import { Session } from "next-auth"
+import UserDropdown from "@/app/components/modal/user-dropdown";
+import UserAuthForm  from "@/app/components/modal/signModal"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
-export const Navbar = () => {
+const Navbar = ({ session }: { session: Session | null }) => {
   return (
     <div className='border-b flex flex-col sm:flex-row items-start sm:items-center sm:pr-10 bg-gray-100'>
       <div className="py-3 px-8 flex flex-1 items-center ">
@@ -17,9 +29,50 @@ export const Navbar = () => {
             Gallery-web
             </p>
         </Link>
-        <a className="mr-5 text-sm " href="/">
-          <p>Home</p>
-          </a>
+        <div className="mr-5 text-sm ">
+        {session ? (
+              <UserDropdown session={session} />
+            ) : (
+              <Dialog>
+      <DialogTrigger asChild>
+      <button className="rounded-full border border-gray-100  p-1.5 px-4  text-sm  transition-all bg-white ">
+            <p className="text-sm font-medium md:space-x-3 sm:space-x-2">sign In</p>
+          </button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>sign In</DialogTitle>
+        </DialogHeader>
+        <div className="relative h-[400px] flex-col items-center justify-center lg:max-w-none  lg:px-0">
+        <div className=" flex min-h-full flex-col justify-center px-6 py-12 lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <UserAuthForm />
+            <p className="px-8 text-center text-sm text-muted-foreground">
+              By clicking continue, you agree to our{" "}
+              <Link
+                href=""
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href=""
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+        <DialogFooter>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+          )}
+          </div>
 
     </div>
       <div className='flex sm:items-center pl-8 pb-3 sm:pb-0'>
@@ -72,4 +125,5 @@ export const Navbar = () => {
       
   )
 }
+export default Navbar ;
 
