@@ -14,18 +14,21 @@ const tabs = [
 const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
   const [images, setImages] = useState<any[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); // Track the selected image for the modal
+  const [currentPage, setCurrentPage] = useState(1); // Initialize with page 1
+  const [currentSearchPage, setCurrentSearchPage] = useState(1);
+  
 
 
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const randomPage = Math.floor(Math.random() * 10) + 1;
+        //const randomPage = Math.floor(Math.random() * 10) + 1;
         const response = await fetch(
-          `https://api.unsplash.com/photos?page=${randomPage}&query=cats&client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
+          `https://api.unsplash.com/photos?page=${currentPage}&query=cats&client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
         );
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setImages(data);
       } catch (error) {
         console.error('Error fetching images:', error);
@@ -33,7 +36,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
     };
 
     fetchImages();
-  }, []);
+  }, [currentPage]);
 
   const [activeTab, setActiveTab] = useState('Profiles');
 
@@ -58,7 +61,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
         `https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
       );
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       setImages(data.results);
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -80,7 +83,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
         <div className="mt-6 flex">
         <Search onSearch={handleSearch} />
           <a
-            href="https://aave.notion.site/08521d6d8ec84d10bf0f6d03abcf60cc?v=eb989b589d7447918187bf3c588a2748&amp;pvs=4"
+            href=""
             className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
           >
             <svg
@@ -177,6 +180,51 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
         ) : (
            <p>error loading....</p>
         )}
+        <div className='flex  sm:justify-between  md:mt-[400px]  flex-grow flex-wrap'>
+      <button
+      className='className=" rounded-xl ml-3 mb-3 space-x-3 inline-flex justify-center items-center  px-6 mt-1 py-2 border hover:scale-105 transition-all duration-75 border-gray-200  max-w-fit mx-auto bg-slate-200'
+        onClick={() => {
+          if (currentPage > 1) {
+            setCurrentPage(currentPage - 1); // Go to the previous page
+          }
+        }}
+      >
+        <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        strokeWidth="1.5" 
+        stroke="currentColor" 
+        className="w-6 h-6">
+  <path 
+  strokeLinecap="round" 
+  strokeLinejoin="round" 
+  d="M21 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953l7.108-4.062A1.125 1.125 0 0121 8.688v8.123zM11.25 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953L9.567 7.71a1.125 1.125 0 011.683.977v8.123z" />
+</svg>
+
+        Back
+      </button>
+      <button
+      className='className=" rounded-xl ml-3 mb-3 space-x-3 inline-flex justify-center items-center  px-6 mt-1 py-2 border hover:scale-105 transition-all duration-75 border-gray-200  max-w-fit mx-auto bg-slate-200'
+        onClick={() => {
+          setCurrentPage(currentPage + 1); // Go to the next page
+        }}
+      >
+        <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        strokeWidth="1.5"
+        stroke="currentColor" 
+        className="w-6 h-6">
+  <path 
+  strokeLinecap="round" 
+  strokeLinejoin="round" 
+  d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062a1.125 1.125 0 01-1.683-.977V8.688z" />
+</svg>
+    <p className=''>Next</p> 
+      </button>
+    </div>
                      {/* Render the modal if a selected image exists */}
                 {selectedImage && (
                   <Modal imageUrl={selectedImage} alt_description={selectedImage} closeModal={closeModal}    />
