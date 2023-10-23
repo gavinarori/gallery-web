@@ -37,5 +37,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "vaul": "^0.7.5"
+  },
+  "devDependencies": {
+    "prisma": "^5.4.2"
   }
 }
