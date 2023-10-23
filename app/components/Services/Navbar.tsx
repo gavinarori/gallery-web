@@ -61,7 +61,7 @@ export const Navbar = () => {
             href="https://www.buymeacoffee.com/arorigavin"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg ml-3 mb-3 space-x-3 inline-flex justify-center items-center  px-6 mt-1 py-2 border hover:scale-105 transition-all duration-75 border-gray-200 bg-white max-w-fit mx-auto bg-slate-200 "
+            className="rounded-lg ml-3 mb-3 space-x-3 inline-flex justify-center items-center  px-6 mt-1 py-2 border hover:scale-105 transition-all duration-75 border-gray-200  max-w-fit mx-auto bg-slate-200 "
           >
             <BuyMeACoffee className="w-6 h-6" />
             <p className="font-medium text-gray-600">Buy me a coffee</p>
