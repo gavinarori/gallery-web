@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Suspense } from "react";
 import Nav from "@/app/components/Services/nav";
+import { ThemeProvider } from "@/app/ThemeProvider/ThemeProviderClient"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +20,18 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-      <Suspense fallback="...">
+      
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+          <Suspense fallback="...">
           <Nav />
-        </Suspense>
-        {children}
+         </Suspense>
+            {children}
+          </ThemeProvider>
         </body>
     </html>
   )

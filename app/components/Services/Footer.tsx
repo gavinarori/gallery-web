@@ -2,13 +2,13 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='bg-gray-100'>
-        <div className="p-6 text-center text-slate-900 sm:p-12">
+    <div className=''>
+        <div className="p-6 text-center  sm:p-12">
         Proudly developed by{' '}
         <a
           href="https://gavin-arori-porforlio.vercel.app/"
           target="_blank"
-          className="font-semibold hover:text-white"
+          className="font-semibold "
           rel="noreferrer"
         >
           Gavin Arori
@@ -17,7 +17,7 @@ const Footer = () => {
         <a
           href=""
           target="_blank"
-          className="font-semibold hover:text-slate-200"
+          className="font-semibold "
           rel="noreferrer"
         >
           Front-end developer
@@ -26,7 +26,7 @@ const Footer = () => {
         <a
           href="https://unsplash.com/"
           target="_blank"
-          className="font-semibold hover:text-white"
+          className="font-semibold "
           rel="noreferrer"
         >
           Unsplash

@@ -72,7 +72,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
   };
 
   return (
-    <div className="px-6 py-14 sm:px-10 bg-gray-100">
+    <div className="px-6 py-14 sm:px-10 ">
       <div>
         <h1 className="text-5xl font-bold mt-3">gallery-web</h1>
         <p className="mt-4 max-w-[750px] text-lg text-muted-foreground sm:text-xl">
@@ -132,8 +132,8 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
 
         {/** Code for various tabs */}
         <div className="sm:border-t sm:border-r sm:border-b rounded-tr rounded-br flex flex-1 pb-4">
-          <div className="flex flex-1 flex-wrap p-4">
-              <div className="mx-auto max-w-[1990px] bg-gray-100 p-4">
+          <div className="flex flex-1 flex-wrap p-4 ">
+              <div className="mx-auto max-w-[1990px]  p-4">
                 <div className="columns-1 gap-4  sm:columns-2 xl:columns-3 2xl:columns-4">
                   <div className="after:content relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-gray-100 px-6 pb-16 pt-64 text-center  shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight bg-vintage lg:pt-0">
                     <div className="absolute inset-0 flex items-center justify-center opacity-20 text-black">
