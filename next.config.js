@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['www.freepik.com','images.unsplash.com',"gallery-web-five.vercel.app.googleusercontent.com"],
+        domains: ['www.freepik.com','images.unsplash.com',"lh3.googleusercontent.com","vercel.com"],
       },
 }
 
