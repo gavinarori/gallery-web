@@ -83,7 +83,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
       </DialogContent>
     </Dialog>
           )}
-          <Link href="/music">
+          <Link href="/music" className='ml-3 mb-3 space-x-3 inline-flex justify-center items-center  px-6 mt-1 py-2'>
           <button className="rounded-full border border-accent  p-1.5 px-4 hover:bg-accent   text-sm  transition-all ">
             <p className="text-sm font-medium md:space-x-3 sm:space-x-2">music</p>
           </button>
