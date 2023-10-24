@@ -2,6 +2,8 @@
 import { format } from 'date-fns';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react'
+import { decode } from 'blurhash';
+
 
 type User = {
   username: string;
@@ -18,14 +20,43 @@ type ArticleProps = {
     regular: string;
   };
   user: User;
+  blur_hash:string;
   created_at: string;
   likes: number;
 };
 
-export default function Article({ id, urls, user, created_at, likes }: ArticleProps) {
+export default function Article({ id, urls, user, created_at, likes, blur_hash  }: ArticleProps) {
   
   const [isLoading, setIsLoading] = useState(true);
-  
+
+ 
+  // Function to decode and set blur hash as background
+  function decodeAndSetBlurHash(imageElement: HTMLImageElement | null) {
+    const blurHash = imageElement?.dataset.blurhash;
+
+    if (blurHash) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('3d');
+
+      if (ctx) {
+        const width = imageElement.width;
+        const height = imageElement.height;
+
+        const imageData = decode(blurHash, width, height);
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = width;
+        tempCanvas.height = height;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        if (tempCtx) {
+          tempCtx.putImageData(new ImageData(new Uint8ClampedArray(imageData), width, height), 0, 0);
+          const imageUrl = tempCanvas.toDataURL();
+          imageElement.style.backgroundImage = `url(${imageUrl})`;
+        }
+      }
+    }
+  }
+
   // Simulate loading for 3 seconds (you can replace this with your actual data fetching)
   
   setTimeout(() => {
@@ -45,10 +76,15 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
         <article key={id} className="rounded-3xl ">
         <div className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
         <img
-            src={urls.regular}
-            alt={user.username}
-            className="h-52 object-fit object-cover w-full lg:h-80 rounded-3xl transform  brightness-90 transition will-change-auto group-hover:brightness-125" 
-          />
+          src={urls.regular}
+          alt={user.username}
+          className="h-52 object-fit object-cover w-full lg:h-80 rounded-3xl transform brightness-90 transition will-change-auto group-hover:brightness-125"
+          data-blurhash={blur_hash}
+          onLoad={(e) => {
+          const imgElement = e.target as HTMLImageElement;
+              decodeAndSetBlurHash(imgElement);
+                }}
+              />
         </div>
           <div className="p-5 pb-0 flex flex-col md:flex-row items-start md:items-center justify-between">
             <article className="flex items-center justify-start">
