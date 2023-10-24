@@ -40,14 +40,14 @@ const Navbar = ({ session }: { session: Session | null }) => {
             Gallery-web
             </p>
         </Link>
-        <div className="mr-5 text-sm ">
+        <div className="flex items-center pl-8 pb-3 sm:pb-0">
         {session ? (
               <UserDropdown session={session} />
             ) : (
               <Dialog>
       <DialogTrigger asChild>
-      <button className="rounded-full border border-accent  p-1.5 px-4 hover:bg-accent   text-sm  transition-all ">
-            <p className="text-sm font-medium md:space-x-3 sm:space-x-2">sign In</p>
+      <button className="rounded-full border border-accent  p-1 px-4 hover:bg-accent   text-sm  transition-all ">
+            <p className="text-sm font-medium md:space-x-3 text-center sm:space-x-2">sign In</p>
           </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -83,7 +83,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
       </DialogContent>
     </Dialog>
           )}
-          <Link href="/music">
+          <Link href="/music" className='ml-4 gap-y-2 inline-flex justify-end'>
           <button className="rounded-full border border-accent  p-1.5 px-4 hover:bg-accent   text-sm  transition-all ">
             <p className="text-sm font-medium md:space-x-3 sm:space-x-2">music</p>
           </button>
