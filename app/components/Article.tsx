@@ -35,14 +35,14 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
   return (
     <>
      {isLoading ? ( // Conditionally render loading skeletons
-        <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md bg-gray-100 animate-pulse">
+        <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md  animate-pulse">
           {/* Use SkeletonLoading component here */}
           <SkeletonLoading />
         </div>
       ) : (
-      <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md bg-gray-100">
+      <div className="pb-2 pl-1 rounded-3xl mb-4 gap-2 shadow-xl flex flex-1 flex-wrap">
         
-        <article key={id} className="rounded-3xl">
+        <article key={id} className="rounded-3xl ">
         <div className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
         <img
             src={urls.regular}
@@ -60,8 +60,8 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
               />
               </Link>
               <ul>
-                <li className="text-slate-800 font-bold">{user.name}</li>
-                <li className="text-sm text-slate-800 opacity-75">
+                <li className=" font-bold">{user.name}</li>
+                <li className="text-sm  opacity-75">
                   {format(new Date(created_at), 'dd MMMM yyyy')}
                 </li>
               </ul>
@@ -70,13 +70,13 @@ export default function Article({ id, urls, user, created_at, likes }: ArticlePr
             <article className="mt-5 md:mt-0">
               <a
                 href={`https://instagram.com/${user.instagram_username}`}
-                className="text-sm text-slate-800 opacity-75 underline"
+                className="text-sm  opacity-75 underline"
                 target="_blank"
                 rel="noreferrer"
               >
                 {user.instagram_username}
               </a>
-              <small className="text-slate-800 opacity-75 block">{likes} Likes</small>
+              <small className=" opacity-75 block">{likes} Likes</small>
             </article>
           </div>
         </article>
