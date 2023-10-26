@@ -156,7 +156,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
                   </div>
                   {Array.isArray(images) ? (
           images.map((image, i) => (
-<Dialog key={i}>
+<Dialog key={i} >
   <DialogTrigger asChild>
     <div >
       <Article  {...image} blur_hash={image.blur_hash} />
@@ -165,7 +165,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
   <DialogContent className="sm:max-w-[425px]">
     <DialogHeader>
       {/* Add the title here */}
-      <h2>{image.alt_description}</h2>
+      <h2  >{image.alt_description}</h2>
     </DialogHeader>
     <div className="space-y-3 md:space-y-4 w-full">
       <div className={cc('flex items-center gap-x-3', 'text-xl md:text-3xl leading-snug')}>
@@ -179,7 +179,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
       src={image.urls.small}
       className='h-52 object-fit object-cover lg:h-80 sm:w-[300px] rounded-3xl transform  transition will-change-auto brightness-125'
       alt={image.alt_description}
-      width={370}
+      width={300}
       height={350}
       
     />
