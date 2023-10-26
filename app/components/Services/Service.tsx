@@ -16,9 +16,7 @@ import {
 import { TbPhotoShare } from 'react-icons/tb';
 import { cc } from '@/utility/css';
 import { BiCopy } from 'react-icons/bi';
-import { toast } from 'sonner';
-import { FiCheckSquare } from 'react-icons/fi';
-import { ReactNode } from 'react';
+import Image from 'next/image'
 
 interface ServiceProps {
   searchQuery: string;
@@ -177,12 +175,14 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
       {/* Display the small image here */}
       
       <div >
-      <img  src={image.urls.small} 
-      className="absolute top-0 left-0 right-0 bottom-0 z-0 w-full transition-opacity"
+      <Image
+      src={image.urls.small}
+      className='h-52 object-fit object-cover lg:h-80 sm:w-[300px] rounded-3xl transform  transition will-change-auto brightness-125'
       alt={image.alt_description}
-      height={375}
       width={370}
-      />
+      height={350}
+      
+    />
       </div>
       
       <div
@@ -193,24 +193,39 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
           'border border-gray-200 dark:border-gray-800',
         )}
       >
-        <div className="truncate p-2 w-full">{image.urls.small}</div>
-        <div
-          className={cc(
-            'p-3 border-l',
-            'border-gray-200 bg-gray-100 active:bg-gray-200',
-            'dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-800/75 dark:active-bg-gray-900',
-            'cursor-pointer',
-          )}
-          onClick={() => {
-            // Handle copying the link here
-            toast({
-              title: 'Link to photo copied',
-              description: 'Share with your friends and family',
-            });
-          }}
-        >
-          <BiCopy size={18} />
-        </div>
+        <div  className="truncate p-2"
+    style={{
+    maxWidth: '300px', // Set a maximum width for the URL display
+    whiteSpace: 'nowrap', // Prevent text from wrapping
+    overflow: 'hidden', // Hide any overflow
+    textOverflow: 'ellipsis', // Display ellipsis for overflow text
+  }}
+>{image.urls.small}</div>
+<div
+  className={cc(
+    'p-3 border-l',
+    'border-gray-200 bg-gray-100 active-bg-gray-200',
+    'dark:border-gray-800 dark:bg-gray-900 dark:hover-bg-gray-800/75 dark:active-bg-gray-900',
+    'cursor-pointer',
+  )}
+  onClick={() => {
+    // Copy the URL to the clipboard using the Clipboard API
+    const urlToCopy = image.urls.small;
+    navigator.clipboard.writeText(urlToCopy)
+      .then(() => {
+        // Successfully copied to the clipboard
+        toast({
+          title: 'Link to photo copied',
+          description: 'Share with your friends and family',
+        });
+      })
+      .catch((error) => {
+        console.error('Unable to copy to clipboard:', error);
+      });
+  }}
+>
+  <BiCopy size={18} />
+</div>
       </div>
     </div>
   </DialogContent>
