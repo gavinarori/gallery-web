@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import Modal from '@/app/components/modal/modal';
 import {Search} from '@/app/search/Search';
 import Article from '@/app/components/Article';
 import {
   ChevronLeftIcon,
   ChevronRightIcon
 } from "@heroicons/react/24/outline"
+import { useToast } from "@/components/ui/use-toast"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+import { TbPhotoShare } from 'react-icons/tb';
+import { cc } from '@/utility/css';
+import { BiCopy } from 'react-icons/bi';
+import Image from 'next/image'
+
 interface ServiceProps {
   searchQuery: string;
 }
@@ -14,7 +26,8 @@ const tabs = [
   { name: 'profiles', icon: '' }
 ];
 
-const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
+const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
+  const { toast } = useToast()
   const [images, setImages] = useState<any[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); // Track the selected image for the modal
   const [currentPage, setCurrentPage] = useState(1); // Initialize with page 1
@@ -47,16 +60,6 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
     setActiveTab(tabName);
   };
 
-
-   // Function to open the modal with a selected image
-   const openModal = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
-  };
-
-  // Function to close the modal
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
 
   const handleSearch = async (query: string) => {
     try {
@@ -153,10 +156,80 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
                   </div>
                   {Array.isArray(images) ? (
           images.map((image, i) => (
-            <div key={i} onClick={() => openModal(image.urls.full)}>
-              {/* ... (your existing code) */}
-              <Article key={i} {...image} blur_hash={image.blur_hash} />
-            </div>
+<Dialog key={i}>
+  <DialogTrigger asChild>
+    <div >
+      <Article  {...image} blur_hash={image.blur_hash} />
+    </div>
+  </DialogTrigger>
+  <DialogContent className="sm:max-w-[425px]">
+    <DialogHeader>
+      {/* Add the title here */}
+      <h2>{image.alt_description}</h2>
+    </DialogHeader>
+    <div className="space-y-3 md:space-y-4 w-full">
+      <div className={cc('flex items-center gap-x-3', 'text-xl md:text-3xl leading-snug')}>
+        <TbPhotoShare size={22} className="hidden xs:block" />
+        <div className="flex-grow"></div>
+      </div>
+      {/* Display the small image here */}
+      
+      <div >
+      <Image
+      src={image.urls.small}
+      className='h-52 object-fit object-cover lg:h-80 sm:w-[300px] rounded-3xl transform  transition will-change-auto brightness-125'
+      alt={image.alt_description}
+      width={370}
+      height={350}
+      
+    />
+      </div>
+      
+      <div
+        className={cc(
+          'rounded-md',
+          'w-full overflow-hidden',
+          'flex items-center justify-stretch',
+          'border border-gray-200 dark:border-gray-800',
+        )}
+      >
+        <div  className="truncate p-2"
+    style={{
+    maxWidth: '300px', // Set a maximum width for the URL display
+    whiteSpace: 'nowrap', // Prevent text from wrapping
+    overflow: 'hidden', // Hide any overflow
+    textOverflow: 'ellipsis', // Display ellipsis for overflow text
+  }}
+>{image.urls.small}</div>
+<div
+  className={cc(
+    'p-3 border-l',
+    'border-gray-200 bg-gray-100 active-bg-gray-200',
+    'dark:border-gray-800 dark:bg-gray-900 dark:hover-bg-gray-800/75 dark:active-bg-gray-900',
+    'cursor-pointer',
+  )}
+  onClick={() => {
+    // Copy the URL to the clipboard using the Clipboard API
+    const urlToCopy = image.urls.small;
+    navigator.clipboard.writeText(urlToCopy)
+      .then(() => {
+        // Successfully copied to the clipboard
+        toast({
+          title: 'Link to photo copied',
+          description: 'Share with your friends and family',
+        });
+      })
+      .catch((error) => {
+        console.error('Unable to copy to clipboard:', error);
+      });
+  }}
+>
+  <BiCopy size={18} />
+</div>
+      </div>
+    </div>
+  </DialogContent>
+</Dialog>
           ))
         ) : (
            <p>error loading....</p>
@@ -193,10 +266,6 @@ const Service: React.FC<ServiceProps> = ({ searchQuery })=> {
             </button>
           </nav>
         </div>
-                     {/* Render the modal if a selected image exists */}
-                {selectedImage && (
-                  <Modal imageUrl={selectedImage} alt_description={selectedImage} closeModal={closeModal}    />
-                )}
                 </div>
               </div>
           </div>

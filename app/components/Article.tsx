@@ -71,7 +71,7 @@ export default function Article({ id, urls, user, created_at, likes, blur_hash  
           <SkeletonLoading />
         </div>
       ) : (
-      <div className="rounded-3xl mb-4 gap-2 shadow-xl flex flex-1 flex-wrap">
+      <div className="rounded-3xl p-5 mb-4 gap-2 shadow-xl flex flex-1 flex-wrap">
         
         <article key={id} className="rounded-3xl ">
         <div className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">

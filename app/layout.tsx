@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { Suspense } from "react";
 import Nav from "@/app/components/Services/nav";
 import { ThemeProvider } from "@/app/ThemeProvider/ThemeProviderClient"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default async function RootLayout({
           <Nav />
          </Suspense>
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
     </html>
