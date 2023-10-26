@@ -66,7 +66,7 @@ export default function Article({ id, urls, user, created_at, likes, blur_hash  
   return (
     <>
      {isLoading ? ( // Conditionally render loading skeletons
-        <div className="p-5 rounded-3xl mb-4 gap-2 shadow-md  animate-pulse">
+        <div className="p-4 rounded-3xl mb-4 gap-2 shadow-md  animate-pulse">
           {/* Use SkeletonLoading component here */}
           <SkeletonLoading />
         </div>
