@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Modal from '@/app/components/modal/modal';
 import {Search} from '@/app/search/Search';
 import Article from '@/app/components/Article';
 import {
@@ -23,16 +22,13 @@ import { ReactNode } from 'react';
 
 interface ServiceProps {
   searchQuery: string;
-  urls: {
-    small: string;
-  };
 }
 
 const tabs = [
   { name: 'profiles', icon: '' }
 ];
 
-const Service: React.FC<ServiceProps> = ({ searchQuery,urls })=> {
+const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
   const { toast } = useToast()
   const [images, setImages] = useState<any[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); // Track the selected image for the modal
@@ -66,16 +62,6 @@ const Service: React.FC<ServiceProps> = ({ searchQuery,urls })=> {
     setActiveTab(tabName);
   };
 
-
-   // Function to open the modal with a selected image
-   const openModal = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
-  };
-
-  // Function to close the modal
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
 
   const handleSearch = async (query: string) => {
     try {
@@ -172,10 +158,10 @@ const Service: React.FC<ServiceProps> = ({ searchQuery,urls })=> {
                   </div>
                   {Array.isArray(images) ? (
           images.map((image, i) => (
-<Dialog>
+<Dialog key={i}>
   <DialogTrigger asChild>
-    <div key={i}>
-      <Article key={i} {...image} blur_hash={image.blur_hash} />
+    <div >
+      <Article  {...image} blur_hash={image.blur_hash} />
     </div>
   </DialogTrigger>
   <DialogContent className="sm:max-w-[425px]">
@@ -189,11 +175,16 @@ const Service: React.FC<ServiceProps> = ({ searchQuery,urls })=> {
         <div className="flex-grow"></div>
       </div>
       {/* Display the small image here */}
-      <img src={image.urls.small} 
+      
+      <div >
+      <img  src={image.urls.small} 
+      className="absolute top-0 left-0 right-0 bottom-0 z-0 w-full transition-opacity"
       alt={image.alt_description}
-      height={475}
-      width={500}
+      height={375}
+      width={370}
       />
+      </div>
+      
       <div
         className={cc(
           'rounded-md',
@@ -260,10 +251,6 @@ const Service: React.FC<ServiceProps> = ({ searchQuery,urls })=> {
             </button>
           </nav>
         </div>
-                     {/* Render the modal if a selected image exists */}
-                {selectedImage && (
-                  <Modal imageUrl={selectedImage} alt_description={selectedImage} closeModal={closeModal}    />
-                )}
                 </div>
               </div>
           </div>
