@@ -79,10 +79,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
       <div>
         <h1 className="text-5xl font-bold mt-3">gallery-web</h1>
         <p className="mt-4 max-w-[750px] text-lg text-muted-foreground sm:text-xl">
-          An application boilerplate built with a modern stack with a search query. Simple to get
-          started building your first social app. Leveraging Unsplash APIs, Lens
-          Protocol, Next.js, and tailwindCSS. Tap the picture to open the modal.
-          enjoy!
+        Explore the features of this web application, which includes a theme provider for seamless customization. Share photos effortlessly by simply clicking on an image. You can also enjoy music, which is nearly complete. To upload a picture, just sign in and follow a straightforward guide. This application is built using a modern stack, making it easy to get started on your journey to create your first social app. It leverages the power of Unsplash APIs, Lens Protocol, Next.js, and tailwindCSS. Don't forget to tap the picture to open the modal and enjoy the experience!
         </p>
         
         
