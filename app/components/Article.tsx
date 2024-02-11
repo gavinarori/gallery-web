@@ -29,35 +29,7 @@ export default function Article({ id, urls, user, created_at, likes, blur_hash  
   
   const [isLoading, setIsLoading] = useState(true);
 
- 
-  // Function to decode and set blur hash as background
-  function decodeAndSetBlurHash(imageElement: HTMLImageElement | null) {
-    const blurHash = imageElement?.dataset.blurhash;
 
-    if (blurHash) {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('3d');
-
-      if (ctx) {
-        const width = imageElement.width;
-        const height = imageElement.height;
-
-        const imageData = decode(blurHash, width, height);
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = width;
-        tempCanvas.height = height;
-        const tempCtx = tempCanvas.getContext('2d');
-
-        if (tempCtx) {
-          tempCtx.putImageData(new ImageData(new Uint8ClampedArray(imageData), width, height), 0, 0);
-          const imageUrl = tempCanvas.toDataURL();
-          imageElement.style.backgroundImage = `url(${imageUrl})`;
-        }
-      }
-    }
-  }
-
-  // Simulate loading for 3 seconds (you can replace this with your actual data fetching)
   
   setTimeout(() => {
     setIsLoading(false);
@@ -65,56 +37,48 @@ export default function Article({ id, urls, user, created_at, likes, blur_hash  
 
   return (
     <>
-     {isLoading ? ( // Conditionally render loading skeletons
-        <div className="p-4 rounded-3xl mb-4 gap-2 shadow-md  animate-pulse">
-          {/* Use SkeletonLoading component here */}
+     {isLoading ? ( 
+        <div className="p-4 rounded-3xl mb-4 gap-2 shadow-md  animate-pulse ">
           <SkeletonLoading />
         </div>
       ) : (
-      <div className="rounded-3xl p-5 mb-4 gap-2 shadow-xl flex flex-1 flex-wrap">
+      <div className="rounded-3xl p-5 mb-4 gap-2 mt-4 shadow-xl flex flex-1 flex-wrap dark:bg-accent">
         
         <article key={id} className="rounded-3xl ">
-        <div className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
+        <div className="after:content group relative mb-5 w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
         <img
           src={urls.regular}
           alt={user.username}
-          className="h-52 object-fit object-cover w-full lg:h-80 rounded-3xl transform brightness-90 transition will-change-auto group-hover:brightness-125"
-          data-blurhash={blur_hash}
-          onLoad={(e) => {
-          const imgElement = e.target as HTMLImageElement;
-              decodeAndSetBlurHash(imgElement);
-                }}
+          className="h-auto w-auto object-fit object-cover rounded-3xl transform brightness-90 transition will-change-auto group-hover:brightness-125"
               />
         </div>
-          <div className="p-5 pb-0 flex flex-col md:flex-row items-start md:items-center justify-between">
-            <article className="flex items-center justify-start">
-            <Link href='/components/splash'>
+        <div className="px-4 py-3 w-72">
+        <Link href='/components/splash'>
               <img
                 src={user.profile_image.medium}
                 alt={user.username}
                 className="rounded-full mr-2 w-10 md:w-auto"
               />
               </Link>
-              <ul>
-                <li className=" font-bold">{user.name}</li>
-                <li className="text-sm  opacity-75">
-                  {format(new Date(created_at), 'dd MMMM yyyy')}
-                </li>
-              </ul>
-            </article>
-
-            <article className="mt-5 md:mt-0">
-              <a
+                <span className=" mr-3  text-xs"><a
                 href={`https://instagram.com/${user.instagram_username}`}
-                className="text-sm  opacity-75 underline"
+                className="text-sm "
                 target="_blank"
                 rel="noreferrer"
               >
                 {user.instagram_username}
-              </a>
-              <small className=" opacity-75 block">{likes} Likes</small>
-            </article>
-          </div>
+              </a></span>
+                <p className="text-lg font-bold  truncate block capitalize">{user.name}</p>
+                <div className="flex items-center">
+                  <p className="text-lg font-semibold cursor-auto my-3">{format(new Date(created_at), 'dd MMMM yyyy')}</p>
+                  <div className="ml-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+</svg>
+                  {likes} Likes
+                  </div>
+                </div>
+              </div>
         </article>
       </div>)}
     </>
