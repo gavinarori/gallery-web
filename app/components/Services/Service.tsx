@@ -68,6 +68,48 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
     }
   };
 
+  const download = (imageUrl: string) => {
+    fetch(imageUrl)
+      .then(async response => {
+        // Get the file extension from the URL
+        const contentDisposition = response.headers.get('content-disposition');
+        let fileName = 'downloaded-image';
+        if (contentDisposition) {
+          const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/);
+          if (fileNameMatch?.[1]) {
+            fileName = fileNameMatch[1];
+          }
+        } else {
+          const urlParts = imageUrl.split('/');
+          const lastPart = urlParts[urlParts.length - 1];
+          const urlFileName = lastPart.split('?')[0]; // Remove any query parameters
+          if (urlFileName) {
+            fileName = urlFileName;
+          }
+        }
+        
+        const blob = await response.blob();
+        const fileExtension = blob.type.split('/')[1] || 'png';
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `${fileName}.${fileExtension}`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }).then(() => {
+        // Successfully downloaded to the gallery
+        toast({
+          title: 'photo downloaded successfully, enjoy!',
+          description: 'Share with your friends and family',
+        });
+      })
+      .catch(error => console.error('Image download failed', error));
+      
+  };
+  
+
   return (
     <div className="px-6 py-14 sm:px-10  ">
       <div>
@@ -107,7 +149,7 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
       </div>
       {/* Display the small image here */}
       
-      <div >
+      <div className='flex justify-center items-center'>
       <Image
       src={image.urls.small}
       className='h-52 object-fit object-cover lg:h-80 sm:w-[300px] rounded-3xl transform  transition will-change-auto brightness-125'
@@ -121,14 +163,14 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
       <div
         className={cc(
           'rounded-md',
-          'w-full overflow-hidden',
+          'w-auto overflow-hidden',
           'flex items-center justify-stretch',
           'border border-gray-200 dark:border-gray-800',
         )}
       >
         <div  className="truncate p-2"
     style={{
-    maxWidth: '300px', // Set a maximum width for the URL display
+    maxWidth: '250px', // Set a maximum width for the URL display
     whiteSpace: 'nowrap', // Prevent text from wrapping
     overflow: 'hidden', // Hide any overflow
     textOverflow: 'ellipsis', // Display ellipsis for overflow text
@@ -158,6 +200,20 @@ const Service: React.FC<ServiceProps> = ({ searchQuery})=> {
   }}
 >
   <BiCopy size={18} />
+</div>
+<div
+  className={cc(
+    'p-3 border-l ',
+    'border-gray-200 bg-gray-100 active-bg-gray-200',
+    'dark:border-gray-800 dark:bg-gray-900 dark:hover-bg-gray-800/75 dark:active-bg-gray-900',
+    'cursor-pointer',
+  )}
+  onClick={() => download(image.urls.full)}
+>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-4">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+</svg>
+
 </div>
       </div>
     </div>
