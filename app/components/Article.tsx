@@ -1,7 +1,6 @@
 'use client'
-import { format } from 'date-fns';
-import Link from 'next/link';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { decode } from 'blurhash';
 
 
@@ -14,76 +13,116 @@ type User = {
   instagram_username: string;
 };
 
-type ArticleProps = {
+type ImageData = {
   id: string;
   urls: {
     regular: string;
   };
   user: User;
-  blur_hash:string;
+  blur_hash: string;
   created_at: string;
   likes: number;
+  alt_description: string;
 };
 
-export default function Article({ id, urls, user, created_at, likes, blur_hash  }: ArticleProps) {
-  
+type ArticleProps = {
+  id: string;
+};
+
+const getBase64BlurHash = (blurHash: string, width: number, height: number): string => {
+  const pixels = decode(blurHash, width, height);
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  if (!ctx) {
+    throw new Error('Failed to get 2D context');
+  }
+
+  const imageData = ctx.createImageData(width, height);
+  imageData.data.set(pixels);
+  ctx.putImageData(imageData, 0, 0);
+
+  return canvas.toDataURL();
+};
+
+const Article: React.FC<ArticleProps> = ({ id }) => {
+  const [imageData, setImageData] = useState<ImageData | null>(null);
+  const [placeholder, setPlaceholder] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchImageData = async () => {
+      try {
+        const response = await fetch(
+          `https://api.unsplash.com/photos/${id}?client_id=UEZ2ggGXcymODePcfqH3QTNa3N7FHyko3bRw-lLMzl0`
+        );
+        const data: ImageData = await response.json();
+        setImageData(data);
 
-  
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
+        const placeholder = getBase64BlurHash(data.blur_hash, 32, 32);
+        setPlaceholder(placeholder);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching image data:', error);
+      }
+    };
+
+    fetchImageData();
+  }, [id]);
+
+  if (isLoading || !imageData) {
+    return <SkeletonLoading />;
+  }
 
   return (
-    <>
-     {isLoading ? ( 
-        <div className="p-4 rounded-3xl mb-4 gap-2 shadow-md  animate-pulse ">
-          <SkeletonLoading />
-        </div>
-      ) : (
-      <div className="rounded-3xl p-5 mb-4 gap-2 mt-4 shadow-xl flex flex-1 flex-wrap dark:bg-accent">
-        
-        <article key={id} className="rounded-3xl ">
+    <div className="rounded-3xl p-5 mb-4 gap-2 mt-4 shadow-xl flex flex-1 flex-wrap dark:bg-accent">
+      <article key={imageData.id} className="rounded-3xl">
         <div className="after:content group relative mb-5 w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight hover:scale-110 ease-in-out delay-150 hover:-translate-y-1 hover:transition-transform">
-        <img
-          src={urls.regular}
-          alt={user.username}
-          className="h-auto w-auto object-fit object-cover rounded-3xl transform brightness-90 transition will-change-auto group-hover:brightness-125"
-              />
+          <Image
+            src={imageData.urls.regular}
+            alt={imageData.alt_description}
+            className="h-auto w-auto object-fit object-cover rounded-3xl transform brightness-90 transition will-change-auto group-hover:brightness-125"
+            placeholder="blur"
+            blurDataURL={placeholder}
+            width={500}
+            height={500}
+          />
         </div>
         <div className="px-4 py-3 w-72">
-        <Link href='/components/splash'>
-              <img
-                src={user.profile_image.medium}
-                alt={user.username}
-                className="rounded-full mr-2 w-10 md:w-auto"
-              />
-              </Link>
-                <span className=" mr-3  text-xs"><a
-                href={`https://instagram.com/${user.instagram_username}`}
-                className="text-sm "
-                target="_blank"
-                rel="noreferrer"
-              >
-                {user.instagram_username}
-              </a></span>
-                <p className="text-lg font-bold  truncate block capitalize">{user.name}</p>
-                <div className="flex items-center">
-                  <p className="text-lg font-semibold cursor-auto my-3">{format(new Date(created_at), 'dd MMMM yyyy')}</p>
-                  <div className="ml-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-</svg>
-                  {likes} Likes
-                  </div>
-                </div>
+          <div>
+            <img
+              src={imageData.user.profile_image.medium}
+              alt={imageData.user.username}
+              className="mr-3 h-12 w-12 rounded-full bg-white dark:bg-gray-800"
+            />
+            <div className="flex flex-col justify-center">
+              <div className="flex">
+                <h5 className="mb-1 font-bold text-black dark:text-white">
+                  {imageData.user.name}
+                </h5>
+                <h5 className="mb-1 font-bold text-black dark:text-white">
+                  {imageData.likes}
+                </h5>
               </div>
-        </article>
-      </div>)}
-    </>
+              <span className="text-sm text-gray-700 dark:text-gray-400">
+                @{imageData.user.instagram_username || imageData.user.username}
+              </span>
+              <span className="text-sm text-gray-700 dark:text-gray-400">
+                {new Date(imageData.created_at).toLocaleDateString()}
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
   );
-}
+};
+
+export default Article;
+
 
 
 
